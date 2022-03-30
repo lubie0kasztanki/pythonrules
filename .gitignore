@@ -1,0 +1,5 @@
+__pycache__/
+.coverage
+main.py
+.DS_Store
+*.pyc
