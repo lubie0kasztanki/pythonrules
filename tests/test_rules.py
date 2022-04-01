@@ -12,9 +12,6 @@ def f_one_arg_str_len_eq(arg : LenRule(3)):
 def f_one_arg_len_sm(arg : LenRule(3, "<")):
     pass
 
-@ruled()
-def f_one_arg_str_len_sm(arg : (str, LenRule(3, "<"))):
-    pass
 
 class TestLenRule:
     def test_one_arg_len_sq(self):
@@ -23,19 +20,11 @@ class TestLenRule:
         with raises(RuleViolationException):
             f_one_arg_str_len_eq("ab")
 
-    def test_one_arg_len_sm_str(self):
-        f_one_arg_str_len_sm("ab")
-        with raises(RuleViolationException):
-            f_one_arg_str_len_sm("abc")
-        with raises(RuleViolationException):
-            f_one_arg_str_len_sm([1, 2])
-        with raises(RuleViolationException):
-            f_one_arg_str_len_sm([1, 2, 3])
 
 
 # TEST custom Rules
 class PositiveNumRuleRet(Rule):
-    def apply(self, value):
+    def apply(self, value, kwargs):
         if value < 0:
             return False
 
@@ -50,7 +39,7 @@ class TestPositiveNumRuleRet:
             f_one_arg_PNRRe(-1)
 
 class PositiveNumRuleRet(Rule):
-    def apply(self, value):
+    def apply(self, value, kwargs):
         if value < 0:
             raise RuleViolationException()
 
