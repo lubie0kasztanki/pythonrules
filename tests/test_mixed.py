@@ -1,18 +1,19 @@
 
+""" Checks if all of the rules in a tuple work. """
+
 from pytest import raises
 from pythonrules import ruled, RuleViolationException, LenRule
 
 
 @ruled()
-def f_one_arg_str_len_sm(arg : (str, LenRule(3, "<"))):
+def f_type_and_LenRule(arg : (str, LenRule(3, "<"))):
     pass
 
-
-def test_one_arg_len_sm_str():
-    f_one_arg_str_len_sm("ab")
+def test_type_and_LenRule():
+    f_type_and_LenRule("ab")
     with raises(RuleViolationException):
-        f_one_arg_str_len_sm("abc")
+        f_type_and_LenRule("abc")
     with raises(RuleViolationException):
-        f_one_arg_str_len_sm([1, 2])
+        f_type_and_LenRule([1, 2])
     with raises(RuleViolationException):
-        f_one_arg_str_len_sm([1, 2, 3])
+        f_type_and_LenRule([1, 2, 3])

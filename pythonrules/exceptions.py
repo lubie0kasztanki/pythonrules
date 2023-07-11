@@ -7,5 +7,4 @@ class RuleViolationException(ValueError):
         self.message = message
 
     def add_funcname_argname(self, funcname, argname) -> None:
-        self.message = f"function {funcname},\
-                         argument {argname} {self.message}"
+        self.message = f"function {funcname}, argument {argname} {self.message}"

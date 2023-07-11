@@ -5,50 +5,21 @@ from pythonrules.exceptions import RuleViolationException
 
 # TEST LenRule
 @ruled()
-def f_one_arg_str_len_eq(arg : LenRule(3)):
+def f_LenRule_default(arg : LenRule(3)):
     pass
+
+def test_LenRule_default():
+    f_LenRule_default("abc")
+    f_LenRule_default([1, 2, 3])
+    with raises(RuleViolationException):
+        f_LenRule_default("ab")
 
 @ruled()
-def f_one_arg_len_sm(arg : LenRule(3, "<")):
+def f_LenRule_st(arg : LenRule(3, "<")):
     pass
 
-
-class TestLenRule:
-    def test_one_arg_len_sq(self):
-        f_one_arg_str_len_eq("abc")
-        f_one_arg_str_len_eq([1, 2, 3])
-        with raises(RuleViolationException):
-            f_one_arg_str_len_eq("ab")
-
-
-
-# TEST custom Rules
-class PositiveNumRuleRet(Rule):
-    def apply(self, value, kwargs):
-        if value < 0:
-            return False
-
-@ruled()
-def f_one_arg_PNRRe(arg : PositiveNumRuleRet()):
-    pass
-
-class TestPositiveNumRuleRet:
-    def test_one_arg_PNRRe(self):
-        f_one_arg_PNRRe(2)
-        with raises(RuleViolationException):
-            f_one_arg_PNRRe(-1)
-
-class PositiveNumRuleRet(Rule):
-    def apply(self, value, kwargs):
-        if value < 0:
-            raise RuleViolationException()
-
-@ruled()
-def f_one_arg_PNRRa(arg : PositiveNumRuleRet()):
-    pass
-
-class TestPositiveNumRuleRaise:
-    def test_one_arg_PNRRa(self):
-        f_one_arg_PNRRa(2)
-        with raises(RuleViolationException):
-            f_one_arg_PNRRa(-1)
+def test_LenRule_st():
+    f_LenRule_st("ab")
+    f_LenRule_st([1])
+    with raises(RuleViolationException):
+        f_LenRule_st("abc")

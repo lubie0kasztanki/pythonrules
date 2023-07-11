@@ -9,7 +9,7 @@ def perform_type_check(value : object, type_ : Type) -> None:
     '''Checks if value is of certain type(generic or class).
        Raises RuleViolationException'''
     try:
-        check_type("", value, type_)
+        check_type(value, type_)
     except:
         raise RuleViolationException(f"type missmatch expected {type_}, provided {type(value)}")
 

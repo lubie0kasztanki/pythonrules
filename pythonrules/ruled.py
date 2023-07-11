@@ -3,7 +3,6 @@ from .exceptions import RuleViolationException
 from .utils import lookup_arg_names
 from .checks import check_rules
 
-#TODO: test logger support
 def ruled(logger=None):
     '''Decorator for all the PythonRuled functions'''
     def _ruled(func):
